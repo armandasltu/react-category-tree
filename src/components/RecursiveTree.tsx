@@ -6,7 +6,7 @@ import { Box } from "@material-ui/core";
 
 const RecursiveTree: React.FC = () => {
   const CategoryItem = ({ name, child }: Category) => (
-    <Box ml={2}>
+    <Box ml={1}>
       {`- ${name}`}
       {child?.map((category: Category, index) => (
         <CategoryItem {...category} key={index} />
@@ -15,7 +15,7 @@ const RecursiveTree: React.FC = () => {
   );
 
   return (
-    <div>
+    <Box mt={2}>
       <Typography variant="h6" component="h2">
         Recursive list of categories:
       </Typography>
@@ -24,7 +24,7 @@ const RecursiveTree: React.FC = () => {
           <CategoryItem {...category} key={index} />
         ))}
       </div>
-    </div>
+    </Box>
   );
 };
 
