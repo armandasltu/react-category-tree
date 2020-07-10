@@ -26,7 +26,7 @@ const IterativeTree: React.FC = () => {
 
     while (!result.done) {
       result = iterator.next();
-      resultTree.push(result.value);
+      result.value && resultTree.push(result.value);
     }
 
     return resultTree;

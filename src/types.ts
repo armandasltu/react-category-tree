@@ -4,6 +4,6 @@ export type Category = {
 };
 
 export type CategoryWithDepth = {
-    name: string;
-    depth: number;
+  name: string;
+  depth: number;
 };
