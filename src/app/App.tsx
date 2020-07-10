@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 import RecursiveTree from "components/RecursiveTree";
 import IterativeTree from "components/IterativeTree";
 import {
+  Box,
+  Container,
+  Typography,
   Button,
   Dialog,
   DialogTitle,
@@ -15,25 +15,20 @@ import {
   FormControlLabel,
   Radio,
 } from "@material-ui/core";
-import useCategories from "../hooks/useCategories";
-import { getRandomNumber } from "../utils";
-
-enum ListType {
-  Recursive = "recursive",
-  Iterative = "iterative",
-}
+import useCategories from "hooks/useCategories";
+import { getRandomNumber } from "utils";
+import { ListType } from "types";
 
 export default function App() {
-  const {
-    actions: { addCategory },
-  } = useCategories();
+  const { actions } = useCategories();
   const [listType, setListType] = useState<ListType>(ListType.Recursive);
   const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
   const [categoryName, setCategoryName] = useState<string>("");
   const [categoryParent, setCategoryParentId] = useState<number | null>(null);
+  const { addCategory } = actions;
 
   const onCategoryAdd = (id: number | null) => {
-      setCategoryParentId(id);
+    setCategoryParentId(id);
     setDialogOpen(true);
   };
 

@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./rootReducer";
-
 import { setCategories } from "slices/categoriesSlice";
 import { generateCategories } from "mocks/categories";
 

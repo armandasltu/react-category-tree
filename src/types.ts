@@ -8,3 +8,8 @@ export type Category = {
 export type CategoryWithDepth = {
   depth: number;
 } & Category;
+
+export enum ListType {
+    Recursive = "recursive",
+    Iterative = "iterative",
+}

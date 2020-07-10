@@ -1,10 +1,8 @@
 import React from "react";
 import { Category } from "types";
-import Typography from "@material-ui/core/Typography";
-import { Box } from "@material-ui/core";
+import { Typography, Box, IconButton } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
-import { IconButton } from "@material-ui/core";
-import useCategories from "../hooks/useCategories";
+import useCategories from "hooks/useCategories";
 
 type RecursiveTreeProps = {
   onCategoryAdd: (id: number | null) => void;
