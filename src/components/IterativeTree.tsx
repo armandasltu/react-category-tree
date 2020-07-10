@@ -13,21 +13,22 @@ const IterativeTree: React.FC = () => {
       const { name, child } = category[i];
       yield { name, depth };
       if (child) {
-        yield* processData(child, ++depth);
+        yield* processData(child, depth + 1);
       }
     }
   }
 
   const getCategoryTree = () => {
     const resultTree = [];
-    let iterator = processData(categoryList);
-    let result = iterator.next();
-    resultTree.push(result.value);
+    let iterator = processData(categoryList, 0);
+    let result;
 
-    while (!result.done) {
+    do {
       result = iterator.next();
-      result.value && resultTree.push(result.value);
-    }
+      if (!result.done) {
+        resultTree.push(result.value);
+      }
+    } while (!result.done);
 
     return resultTree;
   };
