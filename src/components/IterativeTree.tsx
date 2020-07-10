@@ -1,17 +1,24 @@
 import React from "react";
-import categoryList from "mocks/categoryList";
 import { Category, CategoryWithDepth } from "types";
 import Typography from "@material-ui/core/Typography";
-import { Box } from "@material-ui/core";
+import { Box, IconButton } from "@material-ui/core";
+import useCategories from "hooks/useCategories";
+import AddIcon from "@material-ui/icons/Add";
 
-const IterativeTree: React.FC = () => {
-  function* processData(category: Category[], depth = 0): any {
+type IterativeTreeProps = {
+  onCategoryAdd: (id: number | null) => void;
+};
+
+const IterativeTree: React.FC<IterativeTreeProps> = ({ onCategoryAdd }) => {
+  const { categories } = useCategories();
+
+  function* processData(category: Category[], depth = 1): any {
     if (!category) {
       return;
     }
     for (let i = 0; i < category.length; i++) {
-      const { name, child } = category[i];
-      yield { name, depth };
+      const { child, ...data } = category[i];
+      yield { ...data, depth };
       if (child) {
         yield* processData(child, depth + 1);
       }
@@ -20,7 +27,7 @@ const IterativeTree: React.FC = () => {
 
   const getCategoryTree = () => {
     const resultTree = [];
-    let iterator = processData(categoryList, 0);
+    let iterator = processData(categories, 1);
     let result;
 
     do {
@@ -33,8 +40,18 @@ const IterativeTree: React.FC = () => {
     return resultTree;
   };
 
-  const CategoryItem = ({ name, depth }: CategoryWithDepth) => (
-    <Box ml={depth}>{`- ${name}`}</Box>
+  const CategoryItem = ({ id, name, depth }: CategoryWithDepth) => (
+    <Box ml={depth}>
+      {`- ${name}`}{" "}
+      <IconButton
+        size="small"
+        onClick={() => {
+          onCategoryAdd(id);
+        }}
+      >
+        <AddIcon fontSize="small" />
+      </IconButton>
+    </Box>
   );
 
   return (

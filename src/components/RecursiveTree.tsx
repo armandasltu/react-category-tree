@@ -1,18 +1,36 @@
 import React from "react";
-import categoryList from "mocks/categoryList";
 import { Category } from "types";
 import Typography from "@material-ui/core/Typography";
 import { Box } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
+import { IconButton } from "@material-ui/core";
+import useCategories from "../hooks/useCategories";
 
-const RecursiveTree: React.FC = () => {
-  const CategoryItem = ({ name, child }: Category) => (
-    <Box ml={1}>
-      {`- ${name}`}
-      {child?.map((category: Category, index) => (
-        <CategoryItem {...category} key={index} />
-      ))}
-    </Box>
-  );
+type RecursiveTreeProps = {
+  onCategoryAdd: (id: number | null) => void;
+};
+
+const RecursiveTree: React.FC<RecursiveTreeProps> = ({ onCategoryAdd }) => {
+  const { categories } = useCategories();
+
+  const CategoryItem = ({ id, name, child }: Category) => {
+    return (
+      <Box ml={1}>
+        {`- ${name}`}
+        <IconButton
+          size="small"
+          onClick={() => {
+            onCategoryAdd(id);
+          }}
+        >
+          <AddIcon fontSize="small" />
+        </IconButton>
+        {child?.map((category: Category, index) => (
+          <CategoryItem {...category} key={index} />
+        ))}
+      </Box>
+    );
+  };
 
   return (
     <Box mt={2}>
@@ -20,7 +38,7 @@ const RecursiveTree: React.FC = () => {
         Recursive list of categories:
       </Typography>
       <div>
-        {categoryList.map((category: Category, index) => (
+        {categories.map((category: Category, index) => (
           <CategoryItem {...category} key={index} />
         ))}
       </div>
