@@ -6,7 +6,7 @@ interface UsersState {
 }
 
 const initialState: UsersState = {
-  categories: [],
+  categories: []
 };
 
 const slice = createSlice({

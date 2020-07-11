@@ -83,6 +83,7 @@ export default function App() {
                 parentId: categoryParent,
               });
               setDialogOpen(false);
+              setCategoryName("");
             }}
           >
             Add

@@ -1,7 +1,7 @@
 import { Category } from "types";
 import { getRandomNumber } from "utils";
 
-export const generateCategories = (count = 50) => {
+export const generateCategories = (count = 20) => {
   const result = [];
   const availableCategories = [
     "Lorem",
@@ -26,7 +26,7 @@ export const generateCategories = (count = 50) => {
   }
 
   const categoryIds = result.map(({ id }: Category) => id);
-  const rootCategoryIds = categoryIds.slice(0, 10);
+  const rootCategoryIds = categoryIds.slice(0, 3);
 
   return result.map((category: Category) => ({
     ...category,

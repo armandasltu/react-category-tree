@@ -27,7 +27,7 @@ const IterativeTree: React.FC<IterativeTreeProps> = ({ onCategoryAdd }) => {
 
   const getCategoryTree = () => {
     const resultTree = [];
-    let iterator = processData(categories, 1);
+    let iterator = processData(categories);
     let result;
 
     do {
@@ -42,7 +42,7 @@ const IterativeTree: React.FC<IterativeTreeProps> = ({ onCategoryAdd }) => {
 
   const CategoryItem = ({ id, name, depth }: CategoryWithDepth) => (
     <Box ml={depth}>
-      {`- ${name}`}{" "}
+      {`- ${name}`}
       <IconButton
         size="small"
         onClick={() => {
